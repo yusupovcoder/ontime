@@ -1,0 +1,11 @@
+{
+  "appId": "app.ontime.planner",
+  "appName": "On Time",
+  "webDir": "www",
+  "android": {
+    "backgroundColor": "#F2F2F7",
+    "allowMixedContent": false,
+    "captureInput": true,
+    "webContentsDebuggingEnabled": false
+  }
+}

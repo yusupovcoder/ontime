@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!-- Защита: разрешены только файлы самого приложения. Сторонние скрипты, стили, шрифты и запросы заблокированы. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <meta name="referrer" content="no-referrer">
+  <title>Сдам вовремя</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <section class="screen" id="scr-tasks" aria-label="Задания"></section>
+  <section class="screen" id="scr-cal" aria-label="Календарь" hidden></section>
+  <section class="screen" id="scr-sched" aria-label="Пары" hidden></section>
+  <section class="screen" id="scr-focus" aria-label="Фокус" hidden></section>
+  <section class="screen" id="scr-grades" aria-label="Оценки" hidden></section>
+  <section class="screen" id="scr-settings" aria-label="Настройки" hidden></section>
+</div>
+
+<nav class="tabbar glass" aria-label="Разделы">
+  <div class="tabbar-in" id="tabbar"></div>
+</nav>
+
+<div class="overlay" id="sheetOv" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+    <div class="grabber" aria-hidden="true"></div>
+    <div class="sheet-nav">
+      <button type="button" class="nav-btn glass glass-btn" id="sheetLeft" aria-label="Отмена"></button>
+      <h2 id="sheetTitle"></h2>
+      <button type="button" class="nav-btn right glass glass-btn" id="sheetRight"></button>
+    </div>
+    <div class="sheet-body" id="sheetBody"></div>
+  </div>
+</div>
+
+<div class="overlay as-ov" id="asOv" hidden>
+  <div class="as" role="alertdialog" aria-modal="true" aria-labelledby="asTitle" aria-describedby="asMsg">
+    <div class="as-group">
+      <div class="as-head"><p class="as-title" id="asTitle"></p><p class="as-msg" id="asMsg"></p></div>
+      <button type="button" class="as-btn" id="asOk"></button>
+    </div>
+    <div class="as-cancel"><button type="button" class="as-btn" id="asCancel">Отмена</button></div>
+  </div>
+</div>
+
+<input type="file" id="importFile" accept=".json,application/json" class="sr-only" tabindex="-1" aria-hidden="true">
+<div class="toast glass" id="toast" hidden role="status"></div>
+<div class="menu-scrim" id="menuScrim" hidden></div>
+<div class="menu" id="menuPop" role="listbox" hidden></div>
+
+<script src="app.js"></script>
+</body>
+</html>

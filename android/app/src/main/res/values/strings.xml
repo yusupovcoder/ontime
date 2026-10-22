@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">On Time</string>
+    <string name="title_activity_main">On Time</string>
+    <string name="package_name">app.ontime.planner</string>
+    <string name="custom_url_scheme">app.ontime.planner</string>
+</resources>

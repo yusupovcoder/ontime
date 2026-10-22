@@ -1,0 +1,73 @@
+# Сборка Android-приложения On Time на серверах GitHub — ничего не нужно ставить на свой компьютер.
+# Запуск: вкладка Actions → «Android APK» → Run workflow (или любой push в репозиторий).
+# Готовый файл: открыть завершённый запуск → внизу раздел Artifacts → on-time-debug-apk.
+name: Android APK
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      HAS_KEYSTORE: ${{ secrets.ONTIME_KEYSTORE_BASE64 != '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: gradle
+
+      - name: Установить зависимости
+        run: npm ci
+
+      - name: Скопировать www в Android-проект
+        run: npx cap sync android
+
+      - name: Собрать отладочный APK
+        working-directory: android
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: on-time-debug-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+
+      # Подписанный релиз (для Google Play) — только если в Settings → Secrets добавлены ключи.
+      - name: Подписанный релиз (APK + AAB)
+        if: env.HAS_KEYSTORE == 'true'
+        env:
+          KS_B64: ${{ secrets.ONTIME_KEYSTORE_BASE64 }}
+          ONTIME_KEYSTORE_PASSWORD: ${{ secrets.ONTIME_KEYSTORE_PASSWORD }}
+          ONTIME_KEY_ALIAS: ${{ secrets.ONTIME_KEY_ALIAS }}
+          ONTIME_KEY_PASSWORD: ${{ secrets.ONTIME_KEY_PASSWORD }}
+        working-directory: android
+        run: |
+          echo "$KS_B64" | base64 -d > "$RUNNER_TEMP/on-time.jks"
+          export ONTIME_KEYSTORE="$RUNNER_TEMP/on-time.jks"
+          ./gradlew assembleRelease bundleRelease --no-daemon
+          rm -f "$RUNNER_TEMP/on-time.jks"
+
+      - uses: actions/upload-artifact@v4
+        if: env.HAS_KEYSTORE == 'true'
+        with:
+          name: on-time-release
+          path: |
+            android/app/build/outputs/apk/release/*.apk
+            android/app/build/outputs/bundle/release/*.aab

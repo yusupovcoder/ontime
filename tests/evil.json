@@ -1,0 +1,5 @@
+{"app":"sdam-vovremya","format":1,"data":{"examples":false,
+ "subjects":[{"id":"s1","name":"<img src=x onerror=window.__pwned=1>","color":"blue);background:url(https://evil.example/x)"},{"id":"__proto__","name":"bad"}],
+ "tasks":[{"id":"t1","title":"<script>window.__pwned=2</script>Взлом","subjectId":"s1","kind":"constructor","due":"2026-10-25","time":"25:99","steps":[{"id":"a\"><b>x","text":"bad id"},{"id":"st1","text":"ok step"}]},
+          {"id":"t2","title":"bad date","due":"2026-02-31"}],
+ "classes":[{"id":"c1","subjectId":"s1","day":2,"start":"09:00","end":"08:00"},{"id":"c2","subjectId":"s1","day":3,"start":"10:40","end":"12:10","type":"lec","room":"<i>305</i>","weeks":"all"}]}}

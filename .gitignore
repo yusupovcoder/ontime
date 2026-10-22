@@ -1,0 +1,6 @@
+.DS_Store
+node_modules/
+tests/big.json
+tests/backup.json
+tests/results.json
+tests/w320.png
