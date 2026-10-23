@@ -19,6 +19,8 @@
 - В манифесте allowBackup=false (данные не уходят в облачную копию Google) — не включать без правки PRIVACY.md
 - MainActivity.java: preferHighRefreshRate() просит максимальную частоту экрана (90/120 Гц), matchWebViewBackground() — фон без вспышки
 - Уведомления (@capacitor/local-notifications, только Android): настройки в `:notif` {on, eve, morn, before, timer}; deadlineNotifs() строит список (id 1000+, не больше 64, примеры ex пропускаются), syncNotifications() пересоздаёт их после каждого scheduleSave()/render(); уведомление таймера id 1 — syncTimerNotif() из storeTimer(); каналы deadlines/timer (notifChannels, переименовываются при смене языка); нажатие на уведомление → openFromNotification(); значок — res/drawable/ic_stat_ontime.xml
+- Обновления (только Android): checkUpdate() берёт https://api.github.com/repos/yusupovcoder/ontime/releases/latest (tag `b<сборка>`, файл on-time.apk; ссылку сверяем с UPDATE_DL), сравнивает с App.getInfo().build; баннер updBanner() на «Заданиях», раздел «Обновления» в настройках, автопроверка `:autoupd` не чаще раза в 6 ч (`:updLast`), «Позже» — `:updSkip`. CSP connect-src разрешает только api.github.com — других адресов не добавлять без моего согласия
+- Релизы: workflow собирает подписанный APK, если есть секреты ONTIME_KEYSTORE_BASE64 / ONTIME_KEYSTORE_PASSWORD (alias ontime); versionCode = 100 + номер запуска; versionName меняй в android/app/build.gradle вместе с VERSION в app.js
 - Заставка при запуске: #intro в разметке + CSS (.intro, intro-*), удаляется после анимации; при prefers-reduced-motion не показывается
 
 ## Модель данных (localStorage, ключ "sdam-vovremya-v1")

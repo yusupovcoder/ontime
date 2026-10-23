@@ -60,7 +60,7 @@ sdam-vovremya/
 
 После правок в `www/` всегда выполняйте `npx cap sync android` (в GitHub Actions это делается само).
 
-**Для Google Play** нужен подписанный AAB: создайте ключ (`keytool -genkeypair -v -keystore on-time.jks -alias ontime -keyalg RSA -keysize 2048 -validity 10000`), храните его и пароли в надёжном месте (потеря ключа = нельзя обновлять приложение), и добавьте в GitHub → Settings → Secrets → Actions: `ONTIME_KEYSTORE_BASE64` (файл в base64), `ONTIME_KEYSTORE_PASSWORD`, `ONTIME_KEY_ALIAS`, `ONTIME_KEY_PASSWORD`. Тогда Actions соберёт ещё и `on-time-release` (APK + AAB). Перед каждой новой версией увеличивайте `versionCode` в `android/app/build.gradle`.
+**Подпись и обновления.** В Settings → Secrets and variables → Actions репозитория должны быть два секрета: `ONTIME_KEYSTORE_BASE64` (ключ `on-time-release.jks` в base64) и `ONTIME_KEYSTORE_PASSWORD`. Тогда каждый push в main собирает подписанный APK (+ AAB для Google Play) и выкладывает его в Releases как `on-time.apk` — постоянная ссылка `https://github.com/yusupovcoder/ontime/releases/latest/download/on-time.apk`. Номер сборки = 100 + номер запуска, поэтому новые версии ставятся поверх старых, а приложение находит их кнопкой «Проверить обновление» (Настройки → Обновления) и при запуске. Ключ и пароль храните отдельно и надёжно: без них обновить установленное приложение будет нельзя. Без секретов собирается только отладочный APK (Actions → Artifacts).
 
 Иконка и заставка: `node assets/make-icons.js`, затем `npm run icons`.
 

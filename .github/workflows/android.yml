@@ -1,6 +1,11 @@
 # Сборка Android-приложения On Time на серверах GitHub — ничего не нужно ставить на свой компьютер.
-# Запуск: вкладка Actions → «Android APK» → Run workflow (или любой push в репозиторий).
-# Готовый файл: открыть завершённый запуск → внизу раздел Artifacts → on-time-debug-apk.
+# Запускается при каждом изменении в main (или вручную: Actions → «Android APK» → Run workflow).
+#
+# Если в Settings → Secrets and variables → Actions есть ONTIME_KEYSTORE_BASE64 и ONTIME_KEYSTORE_PASSWORD:
+#   собирается подписанная версия и выкладывается в Releases как on-time.apk —
+#   постоянная ссылка: https://github.com/<владелец>/<репозиторий>/releases/latest/download/on-time.apk
+#   Новые сборки ставятся поверх старых (тот же ключ), кнопка «Проверить обновление» в приложении их находит.
+# Без секретов: только отладочный APK во вкладке Actions → запуск → Artifacts.
 name: Android APK
 
 on:
@@ -9,14 +14,18 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
+
+concurrency:
+  group: android-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
-      HAS_KEYSTORE: ${{ secrets.ONTIME_KEYSTORE_BASE64 != '' }}
+      HAS_KEYSTORE: ${{ secrets.ONTIME_KEYSTORE_BASE64 != '' && secrets.ONTIME_KEYSTORE_PASSWORD != '' }}
     steps:
       - uses: actions/checkout@v4
 
@@ -31,38 +40,58 @@ jobs:
           java-version: 21
           cache: gradle
 
+      - name: Номер сборки и версия
+        run: |
+          echo "ONTIME_BUILD=$((100 + GITHUB_RUN_NUMBER))" >> "$GITHUB_ENV"
+          echo "ONTIME_VERSION=$(grep -oP 'versionName "\K[^"]+' android/app/build.gradle)" >> "$GITHUB_ENV"
+
       - name: Установить зависимости
         run: npm ci
 
       - name: Скопировать www в Android-проект
         run: npx cap sync android
 
-      - name: Собрать отладочный APK
+      - name: Отладочный APK (нет ключа подписи)
+        if: env.HAS_KEYSTORE != 'true'
         working-directory: android
         run: |
           chmod +x gradlew
           ./gradlew assembleDebug --no-daemon
 
       - uses: actions/upload-artifact@v4
+        if: env.HAS_KEYSTORE != 'true'
         with:
           name: on-time-debug-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
 
-      # Подписанный релиз (для Google Play) — только если в Settings → Secrets добавлены ключи.
-      - name: Подписанный релиз (APK + AAB)
+      - name: Подписанная версия (APK + AAB для Google Play)
         if: env.HAS_KEYSTORE == 'true'
         env:
           KS_B64: ${{ secrets.ONTIME_KEYSTORE_BASE64 }}
           ONTIME_KEYSTORE_PASSWORD: ${{ secrets.ONTIME_KEYSTORE_PASSWORD }}
-          ONTIME_KEY_ALIAS: ${{ secrets.ONTIME_KEY_ALIAS }}
-          ONTIME_KEY_PASSWORD: ${{ secrets.ONTIME_KEY_PASSWORD }}
+          ONTIME_KEY_PASSWORD: ${{ secrets.ONTIME_KEYSTORE_PASSWORD }}
+          ONTIME_KEY_ALIAS: ontime
         working-directory: android
         run: |
+          chmod +x gradlew
           echo "$KS_B64" | base64 -d > "$RUNNER_TEMP/on-time.jks"
           export ONTIME_KEYSTORE="$RUNNER_TEMP/on-time.jks"
           ./gradlew assembleRelease bundleRelease --no-daemon
           rm -f "$RUNNER_TEMP/on-time.jks"
+          cp app/build/outputs/apk/release/app-release.apk "$RUNNER_TEMP/on-time.apk"
+
+      - name: Выложить в Releases
+        if: env.HAS_KEYSTORE == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          COMMIT_MSG: ${{ github.event.head_commit.message }}
+        run: |
+          CHANGES="${COMMIT_MSG%%$'\n'*}"
+          gh release create "b$ONTIME_BUILD" "$RUNNER_TEMP/on-time.apk" \
+            --title "On Time $ONTIME_VERSION · сборка $ONTIME_BUILD" \
+            --notes "Скачайте on-time.apk и установите поверх прежней версии — данные сохранятся. Изменения: ${CHANGES:-ручной запуск}" \
+            --target "$GITHUB_SHA" --latest
 
       - uses: actions/upload-artifact@v4
         if: env.HAS_KEYSTORE == 'true'

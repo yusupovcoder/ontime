@@ -9,8 +9,9 @@ const check = (name, cond) => { all++; if (cond) ok++; console.log((cond ? '  �
   const page = await browser.newPage({ locale: 'ru-RU', viewport: { width: 390, height: 844 } });
   const errors = [];
   page.on('pageerror', (e) => errors.push(String(e)));
-  page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
+  page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text() + ' @ ' + (m.location().url || '')); });
   await page.addInitScript(() => {
+    localStorage.setItem('sdam-vovremya-v1:updLast', String(Date.now())); // автопроверку обновлений здесь не трогаем
     const calls = (window.__calls = []);
     const listeners = (window.__listeners = {});
     window.Capacitor = {
@@ -149,6 +150,46 @@ const check = (name, cond) => { all++; if (cond) ok++; console.log((cond ? '  �
   await plain.click('.screen:not([hidden]) [data-tab="settings"]'); await plain.waitForTimeout(200);
   check('В браузере раздела «Уведомления» нет', !(await plain.textContent('#scr-settings')).includes('Напоминать о сдачах'));
   await plain.close();
+
+  // ---------- обновления ----------
+  {
+    const ctx = await browser.newContext({ locale: 'ru-RU', viewport: { width: 390, height: 844 } });
+    let release = { tag_name: 'b107', assets: [{ name: 'on-time.apk', browser_download_url: 'https://github.com/yusupovcoder/ontime/releases/download/b107/on-time.apk' }] };
+    let apiCalls = 0;
+    await ctx.route('https://api.github.com/**', (r) => { apiCalls++; r.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(release) }); });
+    await ctx.route('https://github.com/**', (r) => r.fulfill({ status: 200, body: 'apk' }));
+    await ctx.addInitScript(() => {
+      window.__listeners = {};
+      window.Capacitor = { PluginHeaders: ['App'].map((name) => ({ name })), isNativePlatform: () => true,
+        nativePromise: (p, m) => Promise.resolve(m === 'getInfo' ? { build: '105', version: '4.1' } : {}),
+        addListener: (p, ev, cb) => { window.__listeners[p + ':' + ev] = cb; return { remove() {} }; } };
+    });
+    const u = await ctx.newPage();
+    u.on('pageerror', (e) => errors.push(String(e)));
+    await u.goto(URL); await u.waitForTimeout(3500);
+    check('Автопроверка при запуске обращается к GitHub один раз', apiCalls === 1);
+    check('На «Заданиях» баннер о новой версии', (await u.textContent('#scr-tasks')).includes('Вышла новая версия — сборка 107'));
+    const href = await u.getAttribute('#scr-tasks .banner.upd a', 'href');
+    check('Ссылка ведёт на on-time.apk из Releases', href === 'https://github.com/yusupovcoder/ontime/releases/download/b107/on-time.apk');
+    await u.click('#scr-tasks [data-action="updlater"]'); await u.waitForTimeout(200);
+    check('«Позже» прячет баннер', !(await u.$('#scr-tasks .banner.upd')));
+    await u.click('.screen:not([hidden]) [data-tab="settings"]'); await u.waitForTimeout(200);
+    const st = await u.textContent('#scr-settings');
+    check('В настройках «Версия 4.1 · сборка 105» и кнопка скачать', st.includes('Версия 4.1 · сборка 105') && st.includes('Скачать и установить'));
+    release = { tag_name: 'b105', assets: release.assets };
+    await u.click('[data-action="updcheck"]'); await u.waitForTimeout(600);
+    check('Та же сборка → «У тебя последняя версия»', (await u.textContent('#toast')).includes('последняя версия') && !(await u.textContent('#scr-settings')).includes('Скачать и установить'));
+    release = { tag_name: 'b999', assets: [{ name: 'on-time.apk', browser_download_url: 'https://evil.example/on-time.apk' }] };
+    await u.click('[data-action="updcheck"]'); await u.waitForTimeout(600);
+    check('Чужая ссылка на файл отклоняется', !(await u.textContent('#scr-settings')).includes('Скачать и установить'));
+    await u.click('#scr-settings label:has(#upd-auto)'); await u.waitForTimeout(100);
+    check('Автопроверку можно выключить', (await u.evaluate(() => localStorage.getItem('sdam-vovremya-v1:autoupd'))) === '0');
+    const before = apiCalls;
+    await u.evaluate(() => localStorage.removeItem('sdam-vovremya-v1:updLast'));
+    await u.reload(); await u.waitForTimeout(3200);
+    check('Выключена — при запуске к GitHub не обращается', apiCalls === before);
+    await ctx.close();
+  }
 
   check('Нет ошибок в консоли', errors.length === 0 || (console.log(errors), false));
   await browser.close();

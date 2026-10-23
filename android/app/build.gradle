@@ -7,7 +7,8 @@ android {
         applicationId "app.ontime.planner"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 5
+        // Номер сборки задаёт GitHub Actions (100 + номер запуска), чтобы каждая новая сборка ставилась поверх прежней.
+        versionCode((System.getenv("ONTIME_BUILD") ?: "5") as int)
         versionName "4.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {

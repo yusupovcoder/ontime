@@ -118,6 +118,11 @@
       "n.tomorrow": "Сдать завтра", "n.tomorrowAt": "Сдать завтра до {t}", "n.today": "Сдать сегодня", "n.todayAt": "Сдать сегодня до {t}",
       "n.soon": "До сдачи осталось {d}", "n.focusEnd": "Фокус окончен", "n.focusEndB": "Пора сделать перерыв.",
       "n.breakEnd": "Перерыв окончен", "n.breakEndB": "Пора вернуться к делу.", "ch.deadlines": "Сдачи заданий", "ch.timer": "Таймер",
+      "set.whereApp": "Данные хранятся только в памяти этого телефона и никуда не отправляются.", "st.app": "Сохраняется только на этом телефоне", "set.update": "Обновления", "set.build": "Версия {v} · сборка {b}", "set.checkUpd": "Проверить обновление", "set.autoUpd": "Проверять при запуске",
+      "set.updNote": "Приложение спрашивает у GitHub только номер последней версии. Ничего о тебе и твоих заданиях не отправляется.",
+      "upd.checking": "Проверяю…", "upd.latest": "У тебя последняя версия.", "upd.latestShort": "Последняя", "upd.avail": "Вышла новая версия — сборка {b}",
+      "upd.get": "Скачать и установить", "upd.later": "Позже", "upd.fail": "Не удалось проверить. Нужен интернет.", "upd.failShort": "Нет связи",
+      "upd.how": "Открой скачанный файл и нажми «Обновить». Задания сохранятся.",
       "t.notifOn": "Напоминания включены.", "t.notifDenied": "Уведомления запрещены. Разреши их в настройках телефона.",
       "set.data": "Данные", "set.export": "Скачать резервную копию", "set.import": "Загрузить из файла", "set.wipe": "Удалить все данные",
       "set.whereCloud": "Данные хранятся в твоём аккаунте Claude, в личном разделе этого приложения. Видишь их только ты.",
@@ -229,6 +234,11 @@
       "n.tomorrow": "Due tomorrow", "n.tomorrowAt": "Due tomorrow at {t}", "n.today": "Due today", "n.todayAt": "Due today at {t}",
       "n.soon": "{d} left until the deadline", "n.focusEnd": "Focus finished", "n.focusEndB": "Time for a break.",
       "n.breakEnd": "Break is over", "n.breakEndB": "Time to get back to work.", "ch.deadlines": "Deadlines", "ch.timer": "Timer",
+      "set.whereApp": "Your data is stored only on this phone and is never sent anywhere.", "st.app": "Saved only on this phone", "set.update": "Updates", "set.build": "Version {v} · build {b}", "set.checkUpd": "Check for updates", "set.autoUpd": "Check on launch",
+      "set.updNote": "The app only asks GitHub for the latest version number. Nothing about you or your tasks is sent.",
+      "upd.checking": "Checking…", "upd.latest": "You have the latest version.", "upd.latestShort": "Up to date", "upd.avail": "A new version is out — build {b}",
+      "upd.get": "Download and install", "upd.later": "Later", "upd.fail": "Couldn't check. An internet connection is needed.", "upd.failShort": "Offline",
+      "upd.how": "Open the downloaded file and tap “Update”. Your tasks will stay.",
       "t.notifOn": "Reminders are on.", "t.notifDenied": "Notifications are blocked. Allow them in your phone settings.",
       "set.data": "Data", "set.export": "Download backup", "set.import": "Restore from file", "set.wipe": "Delete all data",
       "set.whereCloud": "Your data is stored in your Claude account, in this app's private section. Only you can see it.",
@@ -340,6 +350,11 @@
       "n.tomorrow": "Ertaga topshirish kerak", "n.tomorrowAt": "Ertaga soat {t} gacha topshirish kerak", "n.today": "Bugun topshirish kerak", "n.todayAt": "Bugun soat {t} gacha topshirish kerak",
       "n.soon": "Topshirishga {d} qoldi", "n.focusEnd": "Fokus tugadi", "n.focusEndB": "Tanaffus qilish vaqti.",
       "n.breakEnd": "Tanaffus tugadi", "n.breakEndB": "Ishga qaytish vaqti.", "ch.deadlines": "Topshirish muddatlari", "ch.timer": "Taymer",
+      "set.whereApp": "Maʼlumotlar faqat shu telefon xotirasida saqlanadi va hech qayerga yuborilmaydi.", "st.app": "Faqat shu telefonda saqlanadi", "set.update": "Yangilanishlar", "set.build": "Versiya {v} · {b}-yigʻma", "set.checkUpd": "Yangilanishni tekshirish", "set.autoUpd": "Ishga tushganda tekshirish",
+      "set.updNote": "Ilova GitHubʼdan faqat soʻnggi versiya raqamini soʻraydi. Siz va vazifalaringiz haqida hech narsa yuborilmaydi.",
+      "upd.checking": "Tekshirilmoqda…", "upd.latest": "Sizda eng soʻnggi versiya.", "upd.latestShort": "Soʻnggi", "upd.avail": "Yangi versiya chiqdi — {b}-yigʻma",
+      "upd.get": "Yuklab olish va oʻrnatish", "upd.later": "Keyinroq", "upd.fail": "Tekshirib boʻlmadi. Internet kerak.", "upd.failShort": "Aloqa yoʻq",
+      "upd.how": "Yuklab olingan faylni oching va «Yangilash»ni bosing. Vazifalar saqlanib qoladi.",
       "t.notifOn": "Eslatmalar yoqildi.", "t.notifDenied": "Bildirishnomalar taqiqlangan. Ularni telefon sozlamalarida yoqing.",
       "set.data": "Maʼlumotlar", "set.export": "Zaxira nusxani yuklab olish", "set.import": "Fayldan tiklash", "set.wipe": "Barcha maʼlumotlarni oʻchirish",
       "set.whereCloud": "Maʼlumotlar Claude hisobingizda, ushbu ilovaning shaxsiy boʻlimida saqlanadi. Ularni faqat siz koʻrasiz.",
@@ -812,7 +827,7 @@
     const el = $("saveStatus");
     if (!el) return;
     el.parentElement.className = "status " + (STATUS_CLS[kind] ?? "");
-    el.textContent = t(statusExtraKey || "st." + kind);
+    el.textContent = t(statusExtraKey || (kind === "local" && CAP ? "st.app" : "st." + kind));
   }
   function scheduleSave() {
     saveLocal();
@@ -929,6 +944,7 @@
     const all = state.tasks;
     const active = all.filter((x) => !x.done).sort(byDue);
     let h = navHeader(t("tab.tasks"), todayLine(), navGroup(gearBtn(), plusBtn("newtask", t("btn.newTask"))));
+    h += updBanner();
 
     if (active.length) {
       const x = active[0];
@@ -1154,11 +1170,20 @@
       <label class="row field"><span>${esc(t("set.long"))}</span>${selectHTML("s-long", minOpts(TCONF_OPTS.long), tconf.long)}</label>
       <label class="row"><span class="grow">${esc(t("set.sound"))}</span><input type="checkbox" class="switch" id="s-sound" ${tconf.sound ? "checked" : ""}></label>
     </div><p class="sec-f">${esc(t("set.focusNote"))}</p></section>`;
+    if (updSupported()) {
+      const st = { checking: t("upd.checking"), latest: t("upd.latestShort"), fail: t("upd.failShort") }[upd.status] || "";
+      h += `<section class="grp"><h2 class="sec-h"><span>${esc(t("set.update"))}</span></h2><div class="list">
+        <div class="row"><span class="grow">${esc(t("set.build", { v: VERSION, b: appBuild || "—" }))}</span></div>
+        <button type="button" class="row link-row" data-action="updcheck"${upd.status === "checking" ? " disabled" : ""}><span class="grow">${esc(t("set.checkUpd"))}</span><span class="cnt">${esc(st)}</span></button>
+        ${upd.status === "avail" ? `<a class="row link-row" href="${esc(upd.url)}" data-action="updget"><span class="grow">${esc(t("upd.get"))}</span><span class="cnt">${esc(String(upd.build))}</span></a>` : ""}
+        <label class="row"><span class="grow">${esc(t("set.autoUpd"))}</span><input type="checkbox" class="switch" id="upd-auto" ${autoUpd ? "checked" : ""}></label>
+      </div><p class="sec-f">${esc(t("set.updNote"))}</p></section>`;
+    }
     h += `<section class="grp"><h2 class="sec-h"><span>${esc(t("set.data"))}</span></h2><div class="list">
       <button type="button" class="row link-row" data-action="export">${esc(t("set.export"))}</button>
       <button type="button" class="row link-row" data-action="import">${esc(t("set.import"))}</button>
       <button type="button" class="row link-row danger" data-action="wipe">${esc(t("set.wipe"))}</button>
-    </div><p class="sec-f">${esc(t(mode === "cloud" ? "set.whereCloud" : "set.whereLocal"))}</p></section>`;
+    </div><p class="sec-f">${esc(t(mode === "cloud" ? "set.whereCloud" : CAP ? "set.whereApp" : "set.whereLocal"))}</p></section>`;
     h += `<section class="grp"><h2 class="sec-h"><span>${esc(t("set.privacy"))}</span></h2><div class="list">
       <button type="button" class="row" data-action="policy"><span class="grow">${esc(t("set.policy"))}</span><span class="chev">${ICON.chev}</span></button>
     </div></section>`;
@@ -1576,11 +1601,11 @@
       <h4>Где хранятся</h4>
       ${cloud
         ? `<p>Данные хранятся в твоём аккаунте Claude, в личном разделе этого приложения. Его видишь только ты: ни автор приложения, ни люди, с которыми ты поделишься ссылкой, твои задания и расписание не увидят. Хранение обеспечивает Anthropic по своей политике конфиденциальности. Копия для быстрой загрузки лежит в хранилище браузера на этом устройстве.</p>`
-        : `<p>Данные хранятся только в хранилище браузера (localStorage) на этом устройстве. У приложения нет своего сервера: задания и расписание никуда не отправляются.</p>${CAP ? `<p>Во внутренней памяти приложения на Android данные недоступны другим приложениям, а облачная копия Google для приложения отключена. Напоминания планируются на самом телефоне и никуда не отправляются; если не хочешь, чтобы название задания было видно на заблокированном экране, скрой содержимое уведомлений в настройках телефона.</p>` : ""}`}
+        : `<p>Данные хранятся только в хранилище браузера (localStorage) на этом устройстве. У приложения нет своего сервера: задания и расписание никуда не отправляются.</p>${CAP ? `<p>Во внутренней памяти приложения на Android данные недоступны другим приложениям, а облачная копия Google для приложения отключена. Напоминания планируются на самом телефоне и никуда не отправляются; если не хочешь, чтобы название задания было видно на заблокированном экране, скрой содержимое уведомлений в настройках телефона. Чтобы проверить обновления, приложение запрашивает у GitHub номер последней версии (при запуске — не чаще раза в 6 часов, это можно выключить в настройках); GitHub видит только адрес подключения, данные приложения не передаются.</p>` : ""}`}
       <h4>Чего приложение не делает</h4>
       <ul><li>не показывает рекламу;</li><li>не собирает статистику и не ставит трекеры;</li><li>не продаёт и не передаёт данные третьим лицам.</li></ul>
       <h4>Сторонние сервисы</h4>
-      <p>Приложение использует системный шрифт устройства и не обращается к сторонним сайтам.</p>
+      <p>Приложение использует системный шрифт устройства и не обращается к сторонним сайтам${CAP ? ", кроме проверки обновлений на GitHub (см. выше)" : ""}.</p>
       <h4>Твой контроль</h4>
       <p>В настройках можно скачать резервную копию, загрузить её обратно и удалить все данные. Файл копии хранится там, куда ты его сохранил. Береги его как личный документ.</p>
       <h4>Защита</h4>
@@ -1598,11 +1623,11 @@
       <h4>Where it's stored</h4>
       ${cloud
         ? `<p>Your data is stored in your Claude account, in this app's private section. Only you can see it: neither the app's author nor people you share the link with can see your tasks or schedule. Storage is provided by Anthropic under its privacy policy. A copy for faster loading is kept in this device's browser storage.</p>`
-        : `<p>Your data is stored only in browser storage (localStorage) on this device. The app has no server of its own: your tasks and schedule are never sent anywhere.</p>${CAP ? `<p>On Android, the data sits in the app's private storage that other apps can't read, and Google cloud backup is turned off for the app. Reminders are scheduled on the phone itself and are never sent anywhere; to keep task names off the lock screen, hide notification content in your phone settings.</p>` : ""}`}
+        : `<p>Your data is stored only in browser storage (localStorage) on this device. The app has no server of its own: your tasks and schedule are never sent anywhere.</p>${CAP ? `<p>On Android, the data sits in the app's private storage that other apps can't read, and Google cloud backup is turned off for the app. Reminders are scheduled on the phone itself and are never sent anywhere; to keep task names off the lock screen, hide notification content in your phone settings. To check for updates, the app asks GitHub for the latest version number (on launch at most every 6 hours; you can turn this off in settings); GitHub only sees your connection address, and no app data is sent.</p>` : ""}`}
       <h4>What the app doesn't do</h4>
       <ul><li>show ads;</li><li>collect analytics or use trackers;</li><li>sell or share your data with third parties.</li></ul>
       <h4>Third-party services</h4>
-      <p>The app uses your device's system font and doesn't contact any third-party websites.</p>
+      <p>The app uses your device's system font and doesn't contact any third-party websites${CAP ? ", except for checking GitHub for updates (see above)" : ""}.</p>
       <h4>Your control</h4>
       <p>In Settings you can download a backup, restore it and delete all data. The backup file stays wherever you save it. Keep it safe like any personal document.</p>
       <h4>Security</h4>
@@ -1620,11 +1645,11 @@
       <h4>Qayerda saqlanadi</h4>
       ${cloud
         ? `<p>Maʼlumotlar Claude hisobingizda, ushbu ilovaning shaxsiy boʻlimida saqlanadi. Ularni faqat siz koʻrasiz: na ilova muallifi, na havolani ulashgan odamlaringiz topshiriq va jadvalingizni koʻra olmaydi. Saqlashni Anthropic oʻz maxfiylik siyosatiga muvofiq taʼminlaydi. Tez yuklash uchun nusxa shu qurilmadagi brauzer xotirasida turadi.</p>`
-        : `<p>Maʼlumotlar faqat shu qurilmadagi brauzer xotirasida (localStorage) saqlanadi. Ilovaning oʻz serveri yoʻq: topshiriq va jadvallar hech qayerga yuborilmaydi.</p>${CAP ? `<p>Androidʼda maʼlumotlar ilovaning shaxsiy xotirasida turadi, boshqa ilovalar uni oʻqiy olmaydi, Google bulutiga zaxira nusxa olish esa oʻchirilgan. Eslatmalar telefonning oʻzida rejalashtiriladi va hech qayerga yuborilmaydi; vazifa nomi qulflangan ekranda koʻrinmasligi uchun telefon sozlamalarida bildirishnoma matnini yashiring.</p>` : ""}`}
+        : `<p>Maʼlumotlar faqat shu qurilmadagi brauzer xotirasida (localStorage) saqlanadi. Ilovaning oʻz serveri yoʻq: topshiriq va jadvallar hech qayerga yuborilmaydi.</p>${CAP ? `<p>Androidʼda maʼlumotlar ilovaning shaxsiy xotirasida turadi, boshqa ilovalar uni oʻqiy olmaydi, Google bulutiga zaxira nusxa olish esa oʻchirilgan. Eslatmalar telefonning oʻzida rejalashtiriladi va hech qayerga yuborilmaydi; vazifa nomi qulflangan ekranda koʻrinmasligi uchun telefon sozlamalarida bildirishnoma matnini yashiring. Yangilanishlarni tekshirish uchun ilova GitHubʼdan soʻnggi versiya raqamini soʻraydi (ishga tushganda 6 soatda bir martadan koʻp emas, buni sozlamalarda oʻchirish mumkin); GitHub faqat ulanish manzilini koʻradi, ilova maʼlumotlari yuborilmaydi.</p>` : ""}`}
       <h4>Ilova nima qilmaydi</h4>
       <ul><li>reklama koʻrsatmaydi;</li><li>statistika yigʻmaydi va kuzatuvchilarni oʻrnatmaydi;</li><li>maʼlumotlarni sotmaydi va uchinchi shaxslarga bermaydi.</li></ul>
       <h4>Uchinchi tomon xizmatlari</h4>
-      <p>Ilova qurilmaning tizim shriftidan foydalanadi va begona saytlarga murojaat qilmaydi.</p>
+      <p>Ilova qurilmaning tizim shriftidan foydalanadi va${CAP ? " GitHubʼda yangilanishlarni tekshirishdan tashqari (yuqoriga qarang)" : ""} begona saytlarga murojaat qilmaydi.</p>
       <h4>Sizning nazoratingiz</h4>
       <p>Sozlamalarda zaxira nusxani yuklab olish, uni qayta tiklash va barcha maʼlumotlarni oʻchirish mumkin. Zaxira fayl siz saqlagan joyda turadi. Uni shaxsiy hujjat kabi asrang.</p>
       <h4>Himoya</h4>
@@ -1898,6 +1923,56 @@
     notifChannels();
     refreshExact();
     syncTimerNotif();
+  }
+
+  // ---------- обновления (только Android): номер последней сборки из GitHub Releases ----------
+  const UPDATE_REPO = "yusupovcoder/ontime";
+  const UPDATE_API = `https://api.github.com/repos/${UPDATE_REPO}/releases/latest`;
+  const UPDATE_DL = `https://github.com/${UPDATE_REPO}/releases/download/`;
+  let appBuild = 0, upd = { status: "idle", build: 0, url: "" };
+  const updSupported = () => !!CAP && hasPlugin("App");
+  let autoUpd = pref("autoupd", ["1", "0"], "1") === "1";
+  async function loadAppInfo() {
+    try { const i = await native("App", "getInfo"); appBuild = parseInt(i && i.build, 10) || 0; } catch {}
+  }
+  function rerenderUpd() {
+    if ((tab === "settings" || tab === "tasks") && $("sheetOv").hidden && $("menuPop").hidden) { const y = window.scrollY; renderScreen(); window.scrollTo(0, y); }
+  }
+  async function checkUpdate(manual) {
+    if (!updSupported() || upd.status === "checking") return;
+    upd = { status: "checking", build: 0, url: "" };
+    if (manual) rerenderUpd();
+    let ctl = null, to = null;
+    try {
+      if (!appBuild) await loadAppInfo();
+      ctl = typeof AbortController === "function" ? new AbortController() : null;
+      to = setTimeout(() => ctl && ctl.abort(), 10000);
+      const r = await fetch(UPDATE_API, { headers: { Accept: "application/vnd.github+json" }, credentials: "omit", cache: "no-store", referrerPolicy: "no-referrer", signal: ctl ? ctl.signal : undefined });
+      if (!r.ok) throw new Error("http " + r.status);
+      const j = await r.json();
+      const m = /^b(\d{1,7})$/.exec((j && typeof j.tag_name === "string" && j.tag_name) || "");
+      const asset = (j && Array.isArray(j.assets) ? j.assets : []).find((a) => a && a.name === "on-time.apk");
+      const url = asset && typeof asset.browser_download_url === "string" ? asset.browser_download_url : "";
+      if (!m || !url.startsWith(UPDATE_DL) || !/^[A-Za-z0-9/:._-]+$/.test(url)) throw new Error("bad release");
+      const b = parseInt(m[1], 10);
+      upd = b > appBuild ? { status: "avail", build: b, url } : { status: "latest", build: b, url: "" };
+      setJSON("updLast", Date.now());
+    } catch { upd = { status: "fail", build: 0, url: "" }; }
+    finally { clearTimeout(to); }
+    rerenderUpd();
+    if (manual && upd.status === "latest") toast(t("upd.latest"));
+    if (manual && upd.status === "fail") toast(t("upd.fail"), 4000);
+  }
+  const updBanner = () => (upd.status === "avail" && upd.build !== getJSON("updSkip", 0)
+    ? `<div class="card banner upd"><p><b>${esc(t("upd.avail", { b: upd.build }))}</b><br>${esc(t("upd.how"))}</p>
+        <a class="btn-tinted glass" href="${esc(upd.url)}" data-action="updget">${esc(t("upd.get"))}</a>
+        <button type="button" class="btn-tinted glass" data-action="updlater">${esc(t("upd.later"))}</button></div>` : "");
+  if (updSupported()) {
+    loadAppInfo().then(() => {
+      const last = Number(getJSON("updLast", 0)) || 0;
+      if (autoUpd && Date.now() - last > 6 * 36e5) setTimeout(() => checkUpdate(false), 2500);
+      else rerenderUpd();
+    });
   }
 
   function weekStats() {
@@ -2185,6 +2260,9 @@
     const x = holder ? state.tasks.find((y) => y.id === holder.dataset.id) : null;
     switch (action) {
       case "newtask": return openTaskForm();
+      case "updcheck": return checkUpdate(true);
+      case "updget": toast(t("upd.how"), 6000); return;
+      case "updlater": setJSON("updSkip", upd.build); renderScreen(); return;
       case "exactalarm":
         try { await LN("changeExactNotificationSetting"); } catch {}
         await refreshExact(); syncNotifications(); syncTimerNotif(); return;
@@ -2299,6 +2377,7 @@
       return;
     }
     if (el.id === "n-on") { setNotifOn(el.checked); return; }
+    if (el.id === "upd-auto") { autoUpd = el.checked; setPref("autoupd", autoUpd ? "1" : "0"); return; }
     if (el.id === "n-timer") {
       nconf.timer = el.checked; setJSON("notif", nconf);
       if (el.checked) notifPermission(true).then((ok) => { if (!ok) toast(t("t.notifDenied"), 4500); refreshExact(); });

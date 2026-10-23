@@ -16,7 +16,7 @@
 
 ### Где хранятся данные
 
-Данные хранятся только в хранилище браузера (localStorage) на устройстве пользователя. У приложения нет своего сервера. Задания и расписание не передаются ни автору приложения, ни кому-либо ещё. В Android-версии данные хранятся во внутренней памяти приложения (хранилище встроенного WebView), недоступной другим приложениям; системное резервное копирование в облако Google для приложения отключено. Разрешение «Интернет» нужно только встроенному движку WebView — приложение не обращается к сети. Напоминания о сдачах и окончании таймера (если их включить) планируются на самом телефоне через системный будильник Android и никуда не отправляются. В уведомлении видно название задания и предмет; чтобы скрыть их на заблокированном экране, включите скрытие содержимого уведомлений в настройках телефона.
+Данные хранятся только в хранилище браузера (localStorage) на устройстве пользователя. У приложения нет своего сервера. Задания и расписание не передаются ни автору приложения, ни кому-либо ещё. В Android-версии данные хранятся во внутренней памяти приложения (хранилище встроенного WebView), недоступной другим приложениям; системное резервное копирование в облако Google для приложения отключено. Разрешение «Интернет» нужно только встроенному движку WebView — приложение не обращается к сети. Напоминания о сдачах и окончании таймера (если их включить) планируются на самом телефоне через системный будильник Android и никуда не отправляются. В уведомлении видно название задания и предмет; чтобы скрыть их на заблокированном экране, включите скрытие содержимого уведомлений в настройках телефона. Для проверки обновлений Android-версия обращается к api.github.com и получает номер последней сборки (по кнопке «Проверить обновление» и при запуске не чаще раза в 6 часов — автоматическую проверку можно выключить в настройках). Запрос не содержит данных приложения; GitHub видит IP-адрес устройства, как при открытии любого сайта. Файл обновления скачивается браузером телефона со страницы GitHub Releases.
 
 Если приложение открыто как страница на claude.ai, данные хранятся в аккаунте Claude пользователя, в личном разделе этого приложения. Другие люди, включая тех, с кем пользователь поделился ссылкой, к ним доступа не имеют. Хранение обеспечивает Anthropic в соответствии со своей политикой конфиденциальности.
 
@@ -29,7 +29,7 @@
 
 ### Сторонние сервисы
 
-Приложение использует системный шрифт устройства и не обращается ни к каким сторонним сайтам. В локальной версии это закреплено политикой безопасности контента (Content Security Policy) в `index.html`.
+Приложение использует системный шрифт устройства и не загружает ничего со сторонних сайтов. Единственное исключение — проверка обновлений в Android-версии: запрос номера последней версии к api.github.com (см. выше). Content Security Policy в `index.html` разрешает только файлы самого приложения и этот адрес.
 
 ### Управление данными
 
@@ -45,7 +45,7 @@
 
 - Весь введённый текст выводится безопасно: символы не исполняются как код (защита от XSS).
 - Данные из хранилища и из импортируемых файлов проходят строгую проверку: неизвестные поля отбрасываются, значения сверяются со списками допустимых, длина строк и количество записей ограничены.
-- Content Security Policy разрешает загружать только файлы самого приложения.
+- Content Security Policy разрешает загружать только файлы самого приложения; из внешних адресов — только api.github.com для проверки обновлений.
 - Хранилище браузера не шифруется. Любой, кто имеет доступ к браузеру пользователя, может увидеть сохранённые задания. Не храните в приложении пароли и документы.
 
 ### Изменения и контакты
@@ -66,7 +66,7 @@ The app does not ask for a name, phone number, email address or any other person
 
 ### Where data is stored
 
-Data is stored only in browser storage (localStorage) on the user's device. The app has no server of its own. Tasks and schedules are not sent to the app's author or anyone else. In the Android version, data is kept in the app's private storage (the built-in WebView storage), which other apps cannot read; Android cloud backup to Google is turned off for the app. The "Internet" permission is only required by the built-in WebView engine — the app makes no network requests. Deadline and timer reminders (if turned on) are scheduled on the phone itself through Android's alarm system and are never sent anywhere. A notification shows the task name and subject; to hide them on the lock screen, turn on hiding notification content in your phone settings.
+Data is stored only in browser storage (localStorage) on the user's device. The app has no server of its own. Tasks and schedules are not sent to the app's author or anyone else. In the Android version, data is kept in the app's private storage (the built-in WebView storage), which other apps cannot read; Android cloud backup to Google is turned off for the app. The "Internet" permission is only required by the built-in WebView engine — the app makes no network requests. Deadline and timer reminders (if turned on) are scheduled on the phone itself through Android's alarm system and are never sent anywhere. A notification shows the task name and subject; to hide them on the lock screen, turn on hiding notification content in your phone settings. To check for updates, the Android version contacts api.github.com to get the latest build number (when you tap “Check for updates” and on launch at most every 6 hours — automatic checks can be turned off in settings). The request contains no app data; GitHub sees the device's IP address, as with any website. The update file is downloaded by the phone's browser from GitHub Releases.
 
 When the app is opened as a page on claude.ai, data is stored in the user's Claude account, in this app's private section. Other people, including anyone the user shares the link with, cannot access it. Storage is provided by Anthropic under its privacy policy.
 
@@ -79,7 +79,7 @@ When the app is opened as a page on claude.ai, data is stored in the user's Clau
 
 ### Third-party services
 
-The app uses the device's system font and does not contact any third-party websites. In the local version this is enforced by the Content Security Policy in `index.html`.
+The app uses the device's system font and loads nothing from third-party websites. The only exception is the update check in the Android version: a request to api.github.com for the latest version number (see above). The Content Security Policy in `index.html` allows only the app's own files and this address.
 
 ### Managing your data
 
@@ -95,7 +95,7 @@ The backup file stays wherever the user saves it. It is not encrypted, so treat 
 
 - All entered text is displayed safely: characters are never executed as code (XSS protection).
 - Data from storage and imported files is strictly validated: unknown fields are discarded, values are checked against allowed lists, and string lengths and record counts are limited.
-- The Content Security Policy allows loading only the app's own files.
+- The Content Security Policy allows loading only the app's own files; the only outside address allowed is api.github.com for update checks.
 - Browser storage is not encrypted. Anyone with access to the user's browser can see saved tasks. Do not store passwords or documents in the app.
 
 ### Changes and contact
@@ -116,7 +116,7 @@ Ilova ism, telefon raqami, elektron pochta manzili va boshqa shaxsiy maʼlumotla
 
 ### Maʼlumotlar qayerda saqlanadi
 
-Maʼlumotlar faqat foydalanuvchi qurilmasidagi brauzer xotirasida (localStorage) saqlanadi. Ilovaning oʻz serveri yoʻq. Topshiriq va jadvallar ilova muallifiga ham, boshqa hech kimga ham yuborilmaydi. Android versiyasida maʼlumotlar ilovaning shaxsiy xotirasida (ichki WebView xotirasi) saqlanadi, boshqa ilovalar uni oʻqiy olmaydi; Google bulutiga tizimli zaxira nusxa olish ilova uchun oʻchirilgan. «Internet» ruxsati faqat ichki WebView mexanizmi uchun kerak — ilova tarmoqqa murojaat qilmaydi. Topshirish muddati va taymer eslatmalari (yoqilgan boʻlsa) telefonning oʻzida Android signal tizimi orqali rejalashtiriladi va hech qayerga yuborilmaydi. Bildirishnomada vazifa nomi va fan koʻrinadi; ularni qulflangan ekranda yashirish uchun telefon sozlamalarida bildirishnoma matnini yashirishni yoqing.
+Maʼlumotlar faqat foydalanuvchi qurilmasidagi brauzer xotirasida (localStorage) saqlanadi. Ilovaning oʻz serveri yoʻq. Topshiriq va jadvallar ilova muallifiga ham, boshqa hech kimga ham yuborilmaydi. Android versiyasida maʼlumotlar ilovaning shaxsiy xotirasida (ichki WebView xotirasi) saqlanadi, boshqa ilovalar uni oʻqiy olmaydi; Google bulutiga tizimli zaxira nusxa olish ilova uchun oʻchirilgan. «Internet» ruxsati faqat ichki WebView mexanizmi uchun kerak — ilova tarmoqqa murojaat qilmaydi. Topshirish muddati va taymer eslatmalari (yoqilgan boʻlsa) telefonning oʻzida Android signal tizimi orqali rejalashtiriladi va hech qayerga yuborilmaydi. Bildirishnomada vazifa nomi va fan koʻrinadi; ularni qulflangan ekranda yashirish uchun telefon sozlamalarida bildirishnoma matnini yashirishni yoqing. Yangilanishlarni tekshirish uchun Android versiyasi api.github.com ga murojaat qilib, soʻnggi yigʻma raqamini oladi («Yangilanishni tekshirish» tugmasi bosilganda va ishga tushganda 6 soatda bir martadan koʻp emas — avtomatik tekshiruvni sozlamalarda oʻchirish mumkin). Soʻrovda ilova maʼlumotlari boʻlmaydi; GitHub istalgan sayt kabi qurilmaning IP manzilini koʻradi. Yangilanish fayli telefon brauzeri orqali GitHub Releases sahifasidan yuklab olinadi.
 
 Agar ilova claude.ai sahifasi sifatida ochilsa, maʼlumotlar foydalanuvchining Claude hisobida, ushbu ilovaning shaxsiy boʻlimida saqlanadi. Boshqa odamlar, jumladan havola ulashilganlar ham, ularga kira olmaydi. Saqlashni Anthropic oʻz maxfiylik siyosatiga muvofiq taʼminlaydi.
 
@@ -129,7 +129,7 @@ Agar ilova claude.ai sahifasi sifatida ochilsa, maʼlumotlar foydalanuvchining C
 
 ### Uchinchi tomon xizmatlari
 
-Ilova qurilmaning tizim shriftidan foydalanadi va hech qanday begona saytlarga murojaat qilmaydi. Mahalliy versiyada bu `index.html` dagi Content Security Policy bilan mustahkamlangan.
+Ilova qurilmaning tizim shriftidan foydalanadi va begona saytlardan hech narsa yuklamaydi. Yagona istisno — Android versiyasida yangilanishlarni tekshirish: api.github.com dan soʻnggi versiya raqamini soʻrash (yuqoriga qarang). `index.html` dagi Content Security Policy faqat ilovaning oʻz fayllari va shu manzilga ruxsat beradi.
 
 ### Maʼlumotlarni boshqarish
 
@@ -145,7 +145,7 @@ Zaxira fayl foydalanuvchi saqlagan joyda turadi. U shifrlanmagan, shuning uchun 
 
 - Kiritilgan barcha matn xavfsiz koʻrsatiladi: belgilar kod sifatida bajarilmaydi (XSS himoyasi).
 - Xotira va import qilingan fayllardagi maʼlumotlar qatʼiy tekshiriladi: notanish maydonlar tashlab yuboriladi, qiymatlar ruxsat etilganlar roʻyxati bilan solishtiriladi, satr uzunligi va yozuvlar soni cheklangan.
-- Content Security Policy faqat ilovaning oʻz fayllarini yuklashga ruxsat beradi.
+- Content Security Policy faqat ilovaning oʻz fayllarini yuklashga ruxsat beradi; tashqi manzillardan faqat yangilanishlarni tekshirish uchun api.github.com.
 - Brauzer xotirasi shifrlanmaydi. Foydalanuvchi brauzeriga kira oladigan har kim saqlangan topshiriqlarni koʻra oladi. Ilovada parol va hujjatlarni saqlamang.
 
 ### Oʻzgarishlar va aloqa
