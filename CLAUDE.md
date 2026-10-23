@@ -17,6 +17,9 @@
 - Экспорт на Android: Filesystem.writeFile в CACHE + Share.share; цвет значков строки состояния — SystemBars.setStyle в applyAppearance()
 - Без CAP всё работает как в браузере. После правок www/ — `npx cap sync android`; APK собирает .github/workflows/android.yml
 - В манифесте allowBackup=false (данные не уходят в облачную копию Google) — не включать без правки PRIVACY.md
+- MainActivity.java: preferHighRefreshRate() просит максимальную частоту экрана (90/120 Гц), matchWebViewBackground() — фон без вспышки
+- Уведомления (@capacitor/local-notifications, только Android): настройки в `:notif` {on, eve, morn, before, timer}; deadlineNotifs() строит список (id 1000+, не больше 64, примеры ex пропускаются), syncNotifications() пересоздаёт их после каждого scheduleSave()/render(); уведомление таймера id 1 — syncTimerNotif() из storeTimer(); каналы deadlines/timer (notifChannels, переименовываются при смене языка); нажатие на уведомление → openFromNotification(); значок — res/drawable/ic_stat_ontime.xml
+- Заставка при запуске: #intro в разметке + CSS (.intro, intro-*), удаляется после анимации; при prefers-reduced-motion не показывается
 
 ## Модель данных (localStorage, ключ "sdam-vovremya-v1")
 ```

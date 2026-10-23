@@ -570,6 +570,33 @@ textarea.cell-input { resize: vertical; line-height: 1.4; min-height: 96px; }
 @keyframes toast-in { from { opacity: 0; transform: translateX(-50%) scale(0.9); } to { opacity: 1; transform: translateX(-50%); } }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
+/* Заставка при запуске: значок рисуется, затем плавно растворяется. Не перехватывает нажатия. */
+.intro {
+  position: fixed; inset: 0; z-index: 1000; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: var(--bg); pointer-events: none;
+  animation: intro-out 0.5s cubic-bezier(0.4, 0, 0.2, 1) 1.05s forwards;
+}
+.intro-tile {
+  width: 104px; height: 104px; border-radius: 27%; overflow: hidden;
+  box-shadow: 0 18px 40px -14px rgba(47, 100, 255, 0.55), inset 0 0 0 0.5px rgba(255, 255, 255, 0.25);
+  animation: intro-tile 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.25) both;
+}
+.intro-tile svg { display: block; width: 100%; height: 100%; }
+.intro .i-ring { stroke-dasharray: 0 100; animation: intro-ring 0.75s cubic-bezier(0.3, 0, 0.2, 1) 0.15s forwards; }
+.intro .i-check { stroke-dasharray: 100; stroke-dashoffset: 100; animation: intro-check 0.38s cubic-bezier(0.3, 0, 0.2, 1) 0.62s forwards; }
+.intro .i-dot { transform-box: fill-box; transform-origin: center; transform: scale(0); animation: intro-pop 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.6) 0.78s forwards; }
+.intro-name {
+  margin-top: 20px; font-size: 30px; font-weight: 700; letter-spacing: -0.02em; color: var(--label);
+  animation: intro-name 0.55s cubic-bezier(0.2, 0.9, 0.3, 1) 0.4s both;
+}
+@keyframes intro-tile { from { opacity: 0; transform: scale(0.55); } to { opacity: 1; transform: scale(1); } }
+@keyframes intro-ring { to { stroke-dasharray: 86 14; } }
+@keyframes intro-check { to { stroke-dashoffset: 0; } }
+@keyframes intro-pop { to { transform: scale(1); } }
+@keyframes intro-name { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes intro-out { to { opacity: 0; transform: scale(1.08); visibility: hidden; } }
+
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
+  .intro { display: none; }
 }

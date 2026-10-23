@@ -16,7 +16,7 @@
 
 ### Где хранятся данные
 
-Данные хранятся только в хранилище браузера (localStorage) на устройстве пользователя. У приложения нет своего сервера. Задания и расписание не передаются ни автору приложения, ни кому-либо ещё. В Android-версии данные хранятся во внутренней памяти приложения (хранилище встроенного WebView), недоступной другим приложениям; системное резервное копирование в облако Google для приложения отключено. Разрешение «Интернет» нужно только встроенному движку WebView — приложение не обращается к сети.
+Данные хранятся только в хранилище браузера (localStorage) на устройстве пользователя. У приложения нет своего сервера. Задания и расписание не передаются ни автору приложения, ни кому-либо ещё. В Android-версии данные хранятся во внутренней памяти приложения (хранилище встроенного WebView), недоступной другим приложениям; системное резервное копирование в облако Google для приложения отключено. Разрешение «Интернет» нужно только встроенному движку WebView — приложение не обращается к сети. Напоминания о сдачах и окончании таймера (если их включить) планируются на самом телефоне через системный будильник Android и никуда не отправляются. В уведомлении видно название задания и предмет; чтобы скрыть их на заблокированном экране, включите скрытие содержимого уведомлений в настройках телефона.
 
 Если приложение открыто как страница на claude.ai, данные хранятся в аккаунте Claude пользователя, в личном разделе этого приложения. Другие люди, включая тех, с кем пользователь поделился ссылкой, к ним доступа не имеют. Хранение обеспечивает Anthropic в соответствии со своей политикой конфиденциальности.
 
@@ -66,7 +66,7 @@ The app does not ask for a name, phone number, email address or any other person
 
 ### Where data is stored
 
-Data is stored only in browser storage (localStorage) on the user's device. The app has no server of its own. Tasks and schedules are not sent to the app's author or anyone else. In the Android version, data is kept in the app's private storage (the built-in WebView storage), which other apps cannot read; Android cloud backup to Google is turned off for the app. The "Internet" permission is only required by the built-in WebView engine — the app makes no network requests.
+Data is stored only in browser storage (localStorage) on the user's device. The app has no server of its own. Tasks and schedules are not sent to the app's author or anyone else. In the Android version, data is kept in the app's private storage (the built-in WebView storage), which other apps cannot read; Android cloud backup to Google is turned off for the app. The "Internet" permission is only required by the built-in WebView engine — the app makes no network requests. Deadline and timer reminders (if turned on) are scheduled on the phone itself through Android's alarm system and are never sent anywhere. A notification shows the task name and subject; to hide them on the lock screen, turn on hiding notification content in your phone settings.
 
 When the app is opened as a page on claude.ai, data is stored in the user's Claude account, in this app's private section. Other people, including anyone the user shares the link with, cannot access it. Storage is provided by Anthropic under its privacy policy.
 
@@ -116,7 +116,7 @@ Ilova ism, telefon raqami, elektron pochta manzili va boshqa shaxsiy maʼlumotla
 
 ### Maʼlumotlar qayerda saqlanadi
 
-Maʼlumotlar faqat foydalanuvchi qurilmasidagi brauzer xotirasida (localStorage) saqlanadi. Ilovaning oʻz serveri yoʻq. Topshiriq va jadvallar ilova muallifiga ham, boshqa hech kimga ham yuborilmaydi. Android versiyasida maʼlumotlar ilovaning shaxsiy xotirasida (ichki WebView xotirasi) saqlanadi, boshqa ilovalar uni oʻqiy olmaydi; Google bulutiga tizimli zaxira nusxa olish ilova uchun oʻchirilgan. «Internet» ruxsati faqat ichki WebView mexanizmi uchun kerak — ilova tarmoqqa murojaat qilmaydi.
+Maʼlumotlar faqat foydalanuvchi qurilmasidagi brauzer xotirasida (localStorage) saqlanadi. Ilovaning oʻz serveri yoʻq. Topshiriq va jadvallar ilova muallifiga ham, boshqa hech kimga ham yuborilmaydi. Android versiyasida maʼlumotlar ilovaning shaxsiy xotirasida (ichki WebView xotirasi) saqlanadi, boshqa ilovalar uni oʻqiy olmaydi; Google bulutiga tizimli zaxira nusxa olish ilova uchun oʻchirilgan. «Internet» ruxsati faqat ichki WebView mexanizmi uchun kerak — ilova tarmoqqa murojaat qilmaydi. Topshirish muddati va taymer eslatmalari (yoqilgan boʻlsa) telefonning oʻzida Android signal tizimi orqali rejalashtiriladi va hech qayerga yuborilmaydi. Bildirishnomada vazifa nomi va fan koʻrinadi; ularni qulflangan ekranda yashirish uchun telefon sozlamalarida bildirishnoma matnini yashirishni yoqing.
 
 Agar ilova claude.ai sahifasi sifatida ochilsa, maʼlumotlar foydalanuvchining Claude hisobida, ushbu ilovaning shaxsiy boʻlimida saqlanadi. Boshqa odamlar, jumladan havola ulashilganlar ham, ularga kira olmaydi. Saqlashni Anthropic oʻz maxfiylik siyosatiga muvofiq taʼminlaydi.
 

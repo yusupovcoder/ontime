@@ -1,6 +1,6 @@
 {
   "name": "on-time",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "private": true,
   "description": "On Time — student planner: deadlines, calendar, classes, focus timer and grades (RU / UZ / EN)",
   "scripts": {
@@ -14,6 +14,7 @@
     "@capacitor/app": "8.1.2",
     "@capacitor/core": "8.5.3",
     "@capacitor/filesystem": "8.1.4",
+    "@capacitor/local-notifications": "8.3.1",
     "@capacitor/share": "8.0.3"
   },
   "devDependencies": {

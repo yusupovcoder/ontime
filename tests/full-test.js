@@ -365,7 +365,7 @@ const same = (a, b) => JSON.stringify(canon(a)) === JSON.stringify(canon(b));
   sec('Настройки');
   await tab('settings');
   check('Строка статуса сохранения', (await txt('#saveStatus')) === 'Сохраняется только в этом браузере', await txt('#saveStatus'));
-  check('Версия 4.0', (await txt('.ver')).includes('4.0'));
+  check('Версия 4.1', (await txt('.ver')).includes('4.1'));
   await page.click('[data-action="addsubj"]'); await wait(200);
   check('«Добавить предмет» открывает форму', (await txt('#sheetTitle')) === 'Новый предмет' && (await page.evaluate(() => document.activeElement.id)) === 's-name');
   await page.click('#sheetRight'); await wait();

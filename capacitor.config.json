@@ -7,5 +7,11 @@
     "allowMixedContent": false,
     "captureInput": true,
     "webContentsDebuggingEnabled": false
+  },
+  "plugins": {
+    "LocalNotifications": {
+      "smallIcon": "ic_stat_ontime",
+      "iconColor": "#2F8BFF"
+    }
   }
 }

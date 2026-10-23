@@ -1,4 +1,4 @@
-// Сдам вовремя — логика приложения.
+// On Time — логика приложения.
 // Данные хранятся в localStorage браузера. Блок с window.claude нужен только
 // для версии на claude.ai и вне её просто пропускается.
 (() => {
@@ -31,7 +31,7 @@
   })();
   const hasPlugin = (name) => !!(CAP && Array.isArray(CAP.PluginHeaders) && CAP.PluginHeaders.some((h) => h && h.name === name));
   const native = (plugin, method, opts) => (hasPlugin(plugin) ? CAP.nativePromise(plugin, method, opts || {}) : Promise.reject(new Error("unavailable")));
-  const VERSION = "4.0";
+  const VERSION = "4.1";
 
   const svg = (d) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
   const ICON = {
@@ -111,6 +111,14 @@
       "set.flipNote": "Сейчас {p} неделя. Чётность считается от 1 сентября. Если в твоём вузе наоборот, включи переключатель.",
       "set.focus": "Фокус", "set.focusLen": "Фокус", "set.short": "Перерыв", "set.long": "Длинный перерыв", "set.sound": "Звук по окончании",
       "set.focusNote": "Длинный перерыв — после каждых четырёх циклов фокуса.",
+      "set.notif": "Уведомления", "set.notifOn": "Напоминать о сдачах", "set.notifEve": "Накануне", "set.notifMorn": "В день сдачи",
+      "set.notifBefore": "До срока", "set.notifTimer": "Конец фокуса и перерыва", "set.off": "Выкл.", "set.at": "в {t}", "set.before": "за {d}",
+      "set.notifNote": "Напоминания приходят только по несданным заданиям. «До срока» — для заданий, у которых указано время.",
+      "set.notifExact": "Точное время уведомлений", "set.notifExactNote": "Сейчас Android может присылать уведомления с опозданием на несколько минут. Нажми, чтобы разрешить точное время.",
+      "n.tomorrow": "Сдать завтра", "n.tomorrowAt": "Сдать завтра до {t}", "n.today": "Сдать сегодня", "n.todayAt": "Сдать сегодня до {t}",
+      "n.soon": "До сдачи осталось {d}", "n.focusEnd": "Фокус окончен", "n.focusEndB": "Пора сделать перерыв.",
+      "n.breakEnd": "Перерыв окончен", "n.breakEndB": "Пора вернуться к делу.", "ch.deadlines": "Сдачи заданий", "ch.timer": "Таймер",
+      "t.notifOn": "Напоминания включены.", "t.notifDenied": "Уведомления запрещены. Разреши их в настройках телефона.",
       "set.data": "Данные", "set.export": "Скачать резервную копию", "set.import": "Загрузить из файла", "set.wipe": "Удалить все данные",
       "set.whereCloud": "Данные хранятся в твоём аккаунте Claude, в личном разделе этого приложения. Видишь их только ты.",
       "set.whereLocal": "Данные хранятся только в этом браузере на этом устройстве и никуда не отправляются.",
@@ -214,6 +222,14 @@
       "set.flipNote": "This is an {p} week. Parity is counted from September 1. If your university counts the other way, turn this on.",
       "set.focus": "Focus", "set.focusLen": "Focus", "set.short": "Break", "set.long": "Long break", "set.sound": "Sound when finished",
       "set.focusNote": "A long break comes after every four focus cycles.",
+      "set.notif": "Notifications", "set.notifOn": "Deadline reminders", "set.notifEve": "The day before", "set.notifMorn": "On the due day",
+      "set.notifBefore": "Before the deadline", "set.notifTimer": "End of focus and breaks", "set.off": "Off", "set.at": "at {t}", "set.before": "{d} before",
+      "set.notifNote": "Reminders are only sent for unfinished tasks. “Before the deadline” works for tasks with a set time.",
+      "set.notifExact": "Exact notification times", "set.notifExactNote": "Right now Android may deliver notifications a few minutes late. Tap to allow exact times.",
+      "n.tomorrow": "Due tomorrow", "n.tomorrowAt": "Due tomorrow at {t}", "n.today": "Due today", "n.todayAt": "Due today at {t}",
+      "n.soon": "{d} left until the deadline", "n.focusEnd": "Focus finished", "n.focusEndB": "Time for a break.",
+      "n.breakEnd": "Break is over", "n.breakEndB": "Time to get back to work.", "ch.deadlines": "Deadlines", "ch.timer": "Timer",
+      "t.notifOn": "Reminders are on.", "t.notifDenied": "Notifications are blocked. Allow them in your phone settings.",
       "set.data": "Data", "set.export": "Download backup", "set.import": "Restore from file", "set.wipe": "Delete all data",
       "set.whereCloud": "Your data is stored in your Claude account, in this app's private section. Only you can see it.",
       "set.whereLocal": "Your data is stored only in this browser on this device and is never sent anywhere.",
@@ -317,6 +333,14 @@
       "set.flipNote": "Hozir {p} hafta. Juftlik 1-sentabrdan hisoblanadi. Agar oliygohingizda aksincha boʻlsa, buni yoqing.",
       "set.focus": "Fokus", "set.focusLen": "Fokus", "set.short": "Tanaffus", "set.long": "Uzun tanaffus", "set.sound": "Tugaganda ovoz",
       "set.focusNote": "Uzun tanaffus har toʻrt fokus siklidan keyin boʻladi.",
+      "set.notif": "Bildirishnomalar", "set.notifOn": "Topshirish muddatini eslatish", "set.notifEve": "Bir kun oldin", "set.notifMorn": "Topshirish kuni",
+      "set.notifBefore": "Muddatdan oldin", "set.notifTimer": "Fokus va tanaffus tugashi", "set.off": "Oʻchiq", "set.at": "soat {t} da", "set.before": "{d} oldin",
+      "set.notifNote": "Eslatmalar faqat topshirilmagan vazifalar uchun keladi. «Muddatdan oldin» — vaqti koʻrsatilgan vazifalar uchun.",
+      "set.notifExact": "Bildirishnomalarning aniq vaqti", "set.notifExactNote": "Hozir Android bildirishnomalarni bir necha daqiqa kechiktirib yuborishi mumkin. Aniq vaqtga ruxsat berish uchun bosing.",
+      "n.tomorrow": "Ertaga topshirish kerak", "n.tomorrowAt": "Ertaga soat {t} gacha topshirish kerak", "n.today": "Bugun topshirish kerak", "n.todayAt": "Bugun soat {t} gacha topshirish kerak",
+      "n.soon": "Topshirishga {d} qoldi", "n.focusEnd": "Fokus tugadi", "n.focusEndB": "Tanaffus qilish vaqti.",
+      "n.breakEnd": "Tanaffus tugadi", "n.breakEndB": "Ishga qaytish vaqti.", "ch.deadlines": "Topshirish muddatlari", "ch.timer": "Taymer",
+      "t.notifOn": "Eslatmalar yoqildi.", "t.notifDenied": "Bildirishnomalar taqiqlangan. Ularni telefon sozlamalarida yoqing.",
       "set.data": "Maʼlumotlar", "set.export": "Zaxira nusxani yuklab olish", "set.import": "Fayldan tiklash", "set.wipe": "Barcha maʼlumotlarni oʻchirish",
       "set.whereCloud": "Maʼlumotlar Claude hisobingizda, ushbu ilovaning shaxsiy boʻlimida saqlanadi. Ularni faqat siz koʻrasiz.",
       "set.whereLocal": "Maʼlumotlar faqat shu qurilmadagi brauzerda saqlanadi va hech qayerga yuborilmaydi.",
@@ -792,6 +816,7 @@
   }
   function scheduleSave() {
     saveLocal();
+    syncNotifications();
     if (!ref) { setStatus("local"); return; }
     dirty = true;
     setStatus("saving");
@@ -1100,6 +1125,17 @@
         ${ACCENTS.map((k) => `<button type="button" class="swatch" role="radio" aria-checked="${accent === k}" aria-label="${esc(t("acc." + k))}" data-accent-opt="${k}" style="--sc: var(--acc-${k})"></button>`).join("")}
       </div></div>
     </div><p class="sec-f">${esc(t("set.autoNote", { x: IN_ARTIFACT ? t("set.autoClaude") : "" }))}</p></section>`;
+    if (notifAvailable()) {
+      const on = nconf.on;
+      h += `<section class="grp"><h2 class="sec-h"><span>${esc(t("set.notif"))}</span></h2><div class="list">
+        <label class="row"><span class="grow">${esc(t("set.notifOn"))}</span><input type="checkbox" class="switch" id="n-on" ${on ? "checked" : ""}></label>
+        ${on ? `<label class="row field"><span>${esc(t("set.notifEve"))}</span>${selectHTML("n-eve", N_EVE.map((v) => [v, v === "off" ? t("set.off") : t("set.at", { t: v + ":00" })]), nconf.eve)}</label>
+        <label class="row field"><span>${esc(t("set.notifMorn"))}</span>${selectHTML("n-morn", N_MORN.map((v) => [v, v === "off" ? t("set.off") : t("set.at", { t: v.padStart(2, "0") + ":00" })]), nconf.morn)}</label>
+        <label class="row field"><span>${esc(t("set.notifBefore"))}</span>${selectHTML("n-before", N_BEFORE.map((v) => [v, v ? t("set.before", { d: dur(v) }) : t("set.off")]), nconf.before)}</label>` : ""}
+        <label class="row"><span class="grow">${esc(t("set.notifTimer"))}</span><input type="checkbox" class="switch" id="n-timer" ${nconf.timer ? "checked" : ""}></label>
+        ${(on || nconf.timer) && exactAlarm === "denied" ? `<button type="button" class="row" data-action="exactalarm"><span class="grow">${esc(t("set.notifExact"))}</span><span class="chev">${ICON.chev}</span></button>` : ""}
+      </div><p class="sec-f">${esc(t((on || nconf.timer) && exactAlarm === "denied" ? "set.notifExactNote" : "set.notifNote"))}</p></section>`;
+    }
     h += `<section class="grp"><h2 class="sec-h"><span>${esc(t("set.subjects"))}</span></h2><div class="list" style="--inset: 50px">
       ${state.subjects.map((s) => {
         const n = state.tasks.filter((x) => x.subjectId === s.id).length + state.classes.filter((c) => c.subjectId === s.id).length + state.grades.filter((x) => x.subjectId === s.id).length;
@@ -1158,6 +1194,7 @@
       return;
     }
     renderScreen();
+    syncNotifications();
   }
 
   function tick() {
@@ -1539,7 +1576,7 @@
       <h4>Где хранятся</h4>
       ${cloud
         ? `<p>Данные хранятся в твоём аккаунте Claude, в личном разделе этого приложения. Его видишь только ты: ни автор приложения, ни люди, с которыми ты поделишься ссылкой, твои задания и расписание не увидят. Хранение обеспечивает Anthropic по своей политике конфиденциальности. Копия для быстрой загрузки лежит в хранилище браузера на этом устройстве.</p>`
-        : `<p>Данные хранятся только в хранилище браузера (localStorage) на этом устройстве. У приложения нет своего сервера: задания и расписание никуда не отправляются.</p>${CAP ? `<p>Во внутренней памяти приложения на Android данные недоступны другим приложениям, а облачная копия Google для приложения отключена.</p>` : ""}`}
+        : `<p>Данные хранятся только в хранилище браузера (localStorage) на этом устройстве. У приложения нет своего сервера: задания и расписание никуда не отправляются.</p>${CAP ? `<p>Во внутренней памяти приложения на Android данные недоступны другим приложениям, а облачная копия Google для приложения отключена. Напоминания планируются на самом телефоне и никуда не отправляются; если не хочешь, чтобы название задания было видно на заблокированном экране, скрой содержимое уведомлений в настройках телефона.</p>` : ""}`}
       <h4>Чего приложение не делает</h4>
       <ul><li>не показывает рекламу;</li><li>не собирает статистику и не ставит трекеры;</li><li>не продаёт и не передаёт данные третьим лицам.</li></ul>
       <h4>Сторонние сервисы</h4>
@@ -1561,7 +1598,7 @@
       <h4>Where it's stored</h4>
       ${cloud
         ? `<p>Your data is stored in your Claude account, in this app's private section. Only you can see it: neither the app's author nor people you share the link with can see your tasks or schedule. Storage is provided by Anthropic under its privacy policy. A copy for faster loading is kept in this device's browser storage.</p>`
-        : `<p>Your data is stored only in browser storage (localStorage) on this device. The app has no server of its own: your tasks and schedule are never sent anywhere.</p>${CAP ? `<p>On Android, the data sits in the app's private storage that other apps can't read, and Google cloud backup is turned off for the app.</p>` : ""}`}
+        : `<p>Your data is stored only in browser storage (localStorage) on this device. The app has no server of its own: your tasks and schedule are never sent anywhere.</p>${CAP ? `<p>On Android, the data sits in the app's private storage that other apps can't read, and Google cloud backup is turned off for the app. Reminders are scheduled on the phone itself and are never sent anywhere; to keep task names off the lock screen, hide notification content in your phone settings.</p>` : ""}`}
       <h4>What the app doesn't do</h4>
       <ul><li>show ads;</li><li>collect analytics or use trackers;</li><li>sell or share your data with third parties.</li></ul>
       <h4>Third-party services</h4>
@@ -1583,7 +1620,7 @@
       <h4>Qayerda saqlanadi</h4>
       ${cloud
         ? `<p>Maʼlumotlar Claude hisobingizda, ushbu ilovaning shaxsiy boʻlimida saqlanadi. Ularni faqat siz koʻrasiz: na ilova muallifi, na havolani ulashgan odamlaringiz topshiriq va jadvalingizni koʻra olmaydi. Saqlashni Anthropic oʻz maxfiylik siyosatiga muvofiq taʼminlaydi. Tez yuklash uchun nusxa shu qurilmadagi brauzer xotirasida turadi.</p>`
-        : `<p>Maʼlumotlar faqat shu qurilmadagi brauzer xotirasida (localStorage) saqlanadi. Ilovaning oʻz serveri yoʻq: topshiriq va jadvallar hech qayerga yuborilmaydi.</p>${CAP ? `<p>Androidʼda maʼlumotlar ilovaning shaxsiy xotirasida turadi, boshqa ilovalar uni oʻqiy olmaydi, Google bulutiga zaxira nusxa olish esa oʻchirilgan.</p>` : ""}`}
+        : `<p>Maʼlumotlar faqat shu qurilmadagi brauzer xotirasida (localStorage) saqlanadi. Ilovaning oʻz serveri yoʻq: topshiriq va jadvallar hech qayerga yuborilmaydi.</p>${CAP ? `<p>Androidʼda maʼlumotlar ilovaning shaxsiy xotirasida turadi, boshqa ilovalar uni oʻqiy olmaydi, Google bulutiga zaxira nusxa olish esa oʻchirilgan. Eslatmalar telefonning oʻzida rejalashtiriladi va hech qayerga yuborilmaydi; vazifa nomi qulflangan ekranda koʻrinmasligi uchun telefon sozlamalarida bildirishnoma matnini yashiring.</p>` : ""}`}
       <h4>Ilova nima qilmaydi</h4>
       <ul><li>reklama koʻrsatmaydi;</li><li>statistika yigʻmaydi va kuzatuvchilarni oʻrnatmaydi;</li><li>maʼlumotlarni sotmaydi va uchinchi shaxslarga bermaydi.</li></ul>
       <h4>Uchinchi tomon xizmatlari</h4>
@@ -1662,7 +1699,7 @@
     };
   }
   let timer = loadTimer();
-  const storeTimer = () => setJSON("timer", timer);
+  const storeTimer = () => { setJSON("timer", timer); syncTimerNotif(); };
   const timerRemaining = () => (timer.status === "running" ? Math.max(0, timer.endsAt - Date.now()) : timer.remaining);
 
   let audioCtx = null;
@@ -1742,6 +1779,126 @@
     if (timer.status === "running" && Date.now() >= timer.endsAt) timerFinish(true);
     else if (timer.status === "running") updateTimerUI(false);
   }, 250);
+
+  // ---------- уведомления (только Android, плагин LocalNotifications) ----------
+  // Всё планируется на самом телефоне: без сервера и без интернета.
+  const N_EVE = ["off", "18", "19", "20", "21"], N_MORN = ["off", "7", "8", "9", "10"], N_BEFORE = [0, 30, 60, 120, 180];
+  const NID_TIMER = 1, NID_BASE = 1000, NID_SPAN = 1000, N_MAX = 64;
+  function cleanNconf(c) {
+    const o = { on: false, eve: "19", morn: "8", before: 60, timer: true };
+    if (c && typeof c === "object") {
+      if (typeof c.on === "boolean") o.on = c.on;
+      if (N_EVE.includes(c.eve)) o.eve = c.eve;
+      if (N_MORN.includes(c.morn)) o.morn = c.morn;
+      if (N_BEFORE.includes(c.before)) o.before = c.before;
+      if (typeof c.timer === "boolean") o.timer = c.timer;
+    }
+    return o;
+  }
+  let nconf = cleanNconf(getJSON("notif", null));
+  let exactAlarm = "granted";
+  const notifAvailable = () => hasPlugin("LocalNotifications");
+  const LN = (method, opts) => native("LocalNotifications", method, opts);
+  async function notifPermission(ask) {
+    try {
+      let p = await LN("checkPermissions");
+      if (p && p.display === "granted") return true;
+      if (!ask) return false;
+      p = await LN("requestPermissions");
+      return !!(p && p.display === "granted");
+    } catch { return false; }
+  }
+  function notifChannels() {
+    if (!notifAvailable()) return;
+    // visibility 0 = «личное»: на заблокированном экране Android скрывает текст, если так настроено в телефоне.
+    LN("createChannel", { id: "deadlines", name: t("ch.deadlines"), importance: 4, visibility: 0, vibration: true }).catch(() => {});
+    LN("createChannel", { id: "timer", name: t("ch.timer"), importance: 4, visibility: 0, vibration: true }).catch(() => {});
+  }
+  async function refreshExact() {
+    if (!notifAvailable()) return;
+    try { const r = await LN("checkExactNotificationSetting"); exactAlarm = r && r.exact_alarm === "denied" ? "denied" : "granted"; } catch { exactAlarm = "granted"; }
+    if (tab === "settings" && $("sheetOv").hidden) renderScreen();
+  }
+  const nDueAt = (x, days, h, m) => { const [Y, M, D] = x.due.split("-").map(Number); return new Date(Y, M - 1, D + days, h, m, 0, 0); };
+  function deadlineNotifs() {
+    if (!state || !nconf.on) return [];
+    const now = Date.now() + 5000, out = [];
+    for (const x of state.tasks) {
+      if (x.done || x.ex || !DATE_RE.test(x.due)) continue;
+      const s = subjById(x.subjectId), tail = s ? " · " + s.name : "";
+      const [th, tm] = x.time ? x.time.split(":").map(Number) : [23, 59];
+      const add = (at, body) => { if (at.getTime() > now) out.push({ at, title: x.title, body: body + tail, taskId: x.id }); };
+      if (nconf.eve !== "off") add(nDueAt(x, -1, +nconf.eve, 0), x.time ? t("n.tomorrowAt", { t: x.time }) : t("n.tomorrow"));
+      if (nconf.morn !== "off" && (!x.time || th * 60 + tm > +nconf.morn * 60 + 30)) add(nDueAt(x, 0, +nconf.morn, 0), x.time ? t("n.todayAt", { t: x.time }) : t("n.today"));
+      if (nconf.before && x.time) add(new Date(nDueAt(x, 0, th, tm).getTime() - nconf.before * 60000), t("n.soon", { d: dur(nconf.before) }));
+    }
+    out.sort((a, b) => a.at - b.at);
+    return out.slice(0, N_MAX).map((n, i) => ({
+      id: NID_BASE + i, title: n.title, body: n.body, channelId: "deadlines", autoCancel: true,
+      schedule: { at: n.at.toISOString(), allowWhileIdle: true }, extra: { taskId: n.taskId }
+    }));
+  }
+  let nChain = Promise.resolve(), nSyncTimer = null;
+  function syncNotifications() {
+    if (!notifAvailable()) return;
+    clearTimeout(nSyncTimer);
+    nSyncTimer = setTimeout(() => { nChain = nChain.then(doSyncNotifications, doSyncNotifications); }, 700);
+  }
+  async function doSyncNotifications() {
+    try {
+      const pend = await LN("getPending");
+      const old = ((pend && pend.notifications) || []).map((n) => Number(n.id)).filter((id) => id >= NID_BASE && id < NID_BASE + NID_SPAN);
+      if (old.length) await LN("cancel", { notifications: old.map((id) => ({ id })) });
+      const list = deadlineNotifs();
+      if (list.length && (await notifPermission(false))) await LN("schedule", { notifications: list });
+    } catch {}
+  }
+  function syncTimerNotif() {
+    if (!notifAvailable()) return;
+    nChain = nChain.then(async () => {
+      try {
+        await LN("cancel", { notifications: [{ id: NID_TIMER }] });
+        if (!nconf.timer || timer.status !== "running" || timer.endsAt <= Date.now() + 1500) return;
+        if (!(await notifPermission(true))) return;
+        const focus = timer.phase === "focus";
+        await LN("schedule", { notifications: [{
+          id: NID_TIMER, title: t(focus ? "n.focusEnd" : "n.breakEnd"), body: t(focus ? "n.focusEndB" : "n.breakEndB"),
+          channelId: "timer", autoCancel: true, schedule: { at: new Date(timer.endsAt).toISOString(), allowWhileIdle: true }, extra: { tab: "focus" }
+        }] });
+      } catch {}
+    });
+  }
+  async function setNotifOn(on) {
+    if (on && !(await notifPermission(true))) {
+      nconf.on = false; setJSON("notif", nconf); renderScreen();
+      toast(t("t.notifDenied"), 4500); return;
+    }
+    nconf.on = on; setJSON("notif", nconf);
+    syncNotifications();
+    if (on) { toast(t("t.notifOn")); await refreshExact(); }
+    renderScreen();
+  }
+  function openFromNotification(extra, tries = 0) {
+    if (!extra || typeof extra !== "object") return;
+    if (!state) { if (tries < 20) setTimeout(() => openFromNotification(extra, tries + 1), 250); return; }
+    closeMenu(false);
+    if (!$("asOv").hidden) finishAction(false);
+    if (typeof extra.taskId === "string" && ID_RE.test(extra.taskId) && state.tasks.some((x) => x.id === extra.taskId)) {
+      tab = "tasks"; setPref("tab", tab); renderTabbar(); renderScreen(); openDetail(extra.taskId);
+    } else if (extra.tab === "focus") {
+      if (!sh.ov.hidden) closeSheet();
+      tab = "focus"; setPref("tab", tab); renderTabbar(); renderScreen();
+    }
+  }
+  if (notifAvailable()) {
+    try {
+      CAP.addListener("LocalNotifications", "localNotificationActionPerformed", (a) => openFromNotification(a && a.notification && a.notification.extra));
+      if (hasPlugin("App")) CAP.addListener("App", "resume", () => { refreshExact(); syncNotifications(); });
+    } catch {}
+    notifChannels();
+    refreshExact();
+    syncTimerNotif();
+  }
 
   function weekStats() {
     const monday = startOfDay(new Date());
@@ -1913,6 +2070,7 @@
     const changed = relocalizeExamples();
     render();
     if (changed) scheduleSave();
+    notifChannels(); syncTimerNotif();
   }
 
   // ---------- actions ----------
@@ -2027,6 +2185,9 @@
     const x = holder ? state.tasks.find((y) => y.id === holder.dataset.id) : null;
     switch (action) {
       case "newtask": return openTaskForm();
+      case "exactalarm":
+        try { await LN("changeExactNotificationSetting"); } catch {}
+        await refreshExact(); syncNotifications(); syncTimerNotif(); return;
       case "back":
         tab = SCREENS[prevTab] && prevTab !== "settings" ? prevTab : "tasks";
         setPref("tab", tab); renderTabbar(); renderScreen(); window.scrollTo(0, 0); return;
@@ -2137,6 +2298,17 @@
       if (TCONF_OPTS[k].includes(v)) { tconf[k] = v; setJSON("tconf", tconf); if (timer.status === "idle") { timer = newTimer(timer.phase, timer.cycles, timer.subjectId); storeTimer(); } }
       return;
     }
+    if (el.id === "n-on") { setNotifOn(el.checked); return; }
+    if (el.id === "n-timer") {
+      nconf.timer = el.checked; setJSON("notif", nconf);
+      if (el.checked) notifPermission(true).then((ok) => { if (!ok) toast(t("t.notifDenied"), 4500); refreshExact(); });
+      syncTimerNotif(); renderScreen(); return;
+    }
+    if (["n-eve", "n-morn", "n-before"].includes(el.id)) {
+      const k = el.id.slice(2), v = k === "before" ? parseInt(el.value, 10) : el.value;
+      if ((k === "eve" ? N_EVE : k === "morn" ? N_MORN : N_BEFORE).includes(v)) { nconf[k] = v; setJSON("notif", nconf); syncNotifications(); }
+      return;
+    }
     if (el.id === "s-sound") { tconf.sound = el.checked; setJSON("tconf", tconf); if (el.checked) { ensureAudio(); beep(); } return; }
     if (el.id === "g-kind") { gradeKind = GRADE_KIND_KEYS.has(el.value) ? el.value : "cur"; return; }
     if (el.id === "g-target") { gradeTarget = TARGETS.includes(el.value) ? el.value : "4.5"; setPref("gtarget", gradeTarget); refreshSheet(); return; }
@@ -2179,6 +2351,12 @@
   });
 
   // ---------- start ----------
+  const intro = $("intro");
+  if (intro) {
+    const dropIntro = () => { if (intro.isConnected) intro.remove(); };
+    intro.addEventListener("animationend", (e) => { if (e.target === intro) dropIntro(); });
+    setTimeout(dropIntro, 2500);
+  }
   render();
   init();
 })();
