@@ -70,15 +70,22 @@ jobs:
         env:
           KS_B64: ${{ secrets.ONTIME_KEYSTORE_BASE64 }}
           ONTIME_KEYSTORE_PASSWORD: ${{ secrets.ONTIME_KEYSTORE_PASSWORD }}
-          ONTIME_KEY_PASSWORD: ${{ secrets.ONTIME_KEYSTORE_PASSWORD }}
           ONTIME_KEY_ALIAS: ontime
         working-directory: android
         run: |
+          set -o pipefail
           chmod +x gradlew
-          echo "$KS_B64" | base64 -d > "$RUNNER_TEMP/on-time.jks"
-          export ONTIME_KEYSTORE="$RUNNER_TEMP/on-time.jks"
-          ./gradlew assembleRelease bundleRelease --no-daemon
-          rm -f "$RUNNER_TEMP/on-time.jks"
+          KS="$RUNNER_TEMP/on-time.jks"
+          printf '%s' "$KS_B64" | tr -d ' \r\n\t' | base64 -d > "$KS" 2>/dev/null || { echo "::error::Секрет ONTIME_KEYSTORE_BASE64 не читается: вставьте содержимое файла ONTIME_KEYSTORE_BASE64.txt целиком"; exit 1; }
+          PW="$(printf '%s' "$ONTIME_KEYSTORE_PASSWORD" | tr -d ' \r\n\t')"
+          keytool -list -keystore "$KS" -storepass "$PW" -alias "$ONTIME_KEY_ALIAS" > /dev/null 2>&1 || { echo "::error::Ключ прочитан, но пароль ONTIME_KEYSTORE_PASSWORD к нему не подходит (или ключ повреждён)"; exit 1; }
+          export ONTIME_KEYSTORE="$KS" ONTIME_KEYSTORE_PASSWORD="$PW" ONTIME_KEY_PASSWORD="$PW"
+          if ! ./gradlew assembleRelease bundleRelease --no-daemon 2>&1 | tee "$RUNNER_TEMP/gradle.log"; then
+            MSG="$(grep -E "What went wrong|error:|Error:|FAILED|Exception|Lint found" -A6 "$RUNNER_TEMP/gradle.log" | head -60 | sed -e 's/%/%25/g' | sed -e ':a;N;$!ba;s/\n/%0A/g')"
+            echo "::error title=Gradle::${MSG:-см. лог}"
+            rm -f "$KS"; exit 1
+          fi
+          rm -f "$KS"
           cp app/build/outputs/apk/release/app-release.apk "$RUNNER_TEMP/on-time.apk"
 
       - name: Выложить в Releases
